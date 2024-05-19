@@ -21,7 +21,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.z = 20;
+camera.position.set(0, 0, 20);
 scene.add(camera);
 
 // renderer
@@ -46,7 +46,7 @@ loader.load(
     const calculatorModel = gltf.scene;
     scene.add(calculatorModel);
     calculatorModel.scale.set(1.5, 1.5, 1.5);
-    calculatorModel.position.set(0, 0, 0);
+    calculatorModel.position.set(0, 5, 0);
     calculatorModel.rotation.x = Math.PI / 2;
     updateText(calculator.getExpression()); // Initial text
   },
@@ -67,7 +67,7 @@ const screenMaterial = new THREE.MeshStandardMaterial({
   metalness: 0.5,
 });
 const screenMesh = new THREE.Mesh(screenGeometry, screenMaterial);
-screenMesh.position.set(0, 3.4, 0.68);
+screenMesh.position.set(0, 8.4, 0.68);
 screenMesh.rotation.x = Math.PI / 25;
 scene.add(screenMesh);
 
@@ -97,7 +97,7 @@ const updateText = (text: string) => {
         metalness: 0.5,
       });
       textMesh = new THREE.Mesh(textGeometry, textMaterial);
-      textMesh.position.set(-2.7, 3, 0.5);
+      textMesh.position.set(-2.7, 8, 0.5);
       textMesh.rotation.x = Math.PI / 25;
       textMesh.rotation.z = Math.PI / 2000;
       scene.add(textMesh);
@@ -131,7 +131,7 @@ canvas.addEventListener("click", (event) => {
 window.addEventListener("keydown", (event) => {
   if (
     (event.key >= "0" && event.key <= "9") ||
-    ["+", "-", "*", "/"].includes(event.key)
+    ["+", "-", "*", "/", "%"].includes(event.key)
   ) {
     calculator.handleInput(event.key === "*" ? "x" : event.key);
   } else if (event.key === "Enter") {
