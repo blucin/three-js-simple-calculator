@@ -8,6 +8,79 @@
   </head>
   <body>
     <canvas id="threejs-canvas"></canvas>
+    <div class="fixed bottom-0 left-0 right-0 z-40 w-full overflow-y-auto transition-transform bg-white dark:bg-gray-800 transform-none" tabindex="0" aria-labelledby="drawer-bottom-label">
+      <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabs" role="tablist">
+            <li class="me-2" role="presentation">
+                <button
+                    class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                    id="calculator-tab-trigger"
+                    type="button"
+                    role="tab"
+                    aria-controls="calculator-tab-trigger"
+                    aria-selected="true"
+                >
+                    Calculator
+                </button>
+            </li>
+            <li role="presentation">
+                <button
+                    class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                    id="help-tab-trigger"
+                    type="button"
+                    role="tab"
+                    aria-controls="help-tab-trigger"
+                    aria-selected="false"
+                >
+                    Help
+                </button>
+            </li>
+        </ul>
+      </div>
+      <div id="tabContentExample">
+        <div
+            class="hidden rounded-lg bg-gray-50 px-4 pt-2 pb-5 dark:bg-gray-800"
+            id="calculator-tab-content"
+            role="tabpanel"
+            aria-labelledby="calculator-tab-trigger"
+        >
+          <div class="flex flex-col items-center">
+            <div class="flex-1 p-2">
+              <p class="text-2xl font-bold text-gray-900 dark:text-white" id="htmlScreen">0</p>
+            </div>
+            <div class="grid grid-cols-5 divide-y-2">
+                <button id="button-7" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">7</button>
+                <button id="button-8" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">8</button>
+                <button id="button-9" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">9</button>
+                <button id="button-divide" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">/</button>
+                <button id="button-clear" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">C</button>
+                <button id="button-4" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">4</button>
+                <button id="button-5" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">5</button>
+                <button id="button-6" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">6</button>
+                <button id="button-multiply" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">*</button>
+                <button id="button-modulo" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">%</button>
+                <button id="button-1" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">1</button>
+                <button id="button-2" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">2</button>
+                <button id="button-3" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">3</button>
+                <button id="button-subtract" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">-</button>
+                <button id="button-decimal" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">.</button>
+                <button id="button-0" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">0</button>
+                <button id="button-equal" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">=</button>
+                <button id="button-add" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">+</button>
+                <button id="button-clear-entry" class="p-2 text-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">CE</button>
+            </div>
+          </div>
+        </div>
+        <div
+            class="hidden rounded-lg bg-gray-50 px-4 pt-2 pb-5 dark:bg-gray-800"
+            id="help-tab-content"
+            role="tabpanel"
+            aria-labelledby="help-tab-trigger"
+        >
+          
+        </div>
+      </di>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

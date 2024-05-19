@@ -5,6 +5,40 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Calculator } from "./calculator";
+import { initTabs } from "./flowbite";
+
+// html calculator (to be kept in sync with the 3D model)
+initTabs();
+const buttonTypes = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "add",
+  "subtract",
+  "multiply",
+  "divide",
+  "modulo",
+  "clear",
+  "clear-entry",
+  "equal",
+];
+const htmlScreen = document.getElementById("htmlScreen");
+const htmlButtons = buttonTypes.map((type) =>
+  document.getElementById("button-" + type)
+);
+htmlButtons.forEach((button) => {
+  button?.addEventListener("click", () => {
+    calculator.handleInput(button.innerText);
+    updateText(calculator.getExpression());
+  });
+});
 
 // scene
 const scene = new THREE.Scene();
@@ -34,6 +68,8 @@ const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.enableZoom = true;
+controls.enablePan = true;
+controls.enableRotate = true;
 
 // Create calculator instance
 const calculator = new Calculator();
@@ -59,7 +95,7 @@ loader.load(
 // Screen
 // To display the text
 // We won't be using the screen from the model
-// Instead, we will create a separate screen 
+// Instead, we will create a separate screen
 const screenGeometry = new THREE.PlaneGeometry(7, 2.5);
 const screenMaterial = new THREE.MeshStandardMaterial({
   color: 0x888888,
@@ -79,16 +115,13 @@ const updateText = (text: string) => {
   if (textMesh) {
     scene.remove(textMesh);
   }
-  if (text.length === 11) {
-    text = "Overflow";
-  }
   fontLoader.load(
     "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
     (font) => {
-      const textGeometry = new TextGeometry(text, {
+      const textGeometry = new TextGeometry(text.length > 10 ? "Overflow" : text, {
         font: font,
         size: 0.7,
-        height: 0.15,
+        depth: 0.15,
       });
 
       const textMaterial = new THREE.MeshStandardMaterial({
@@ -103,6 +136,9 @@ const updateText = (text: string) => {
       scene.add(textMesh);
     }
   );
+  if (htmlScreen) {
+    htmlScreen.innerText = text;
+  }
 };
 
 // Raycaster and mouse vector
