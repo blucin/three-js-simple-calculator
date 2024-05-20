@@ -6,6 +6,10 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Calculator } from "./calculator";
 import { initTabs } from "./flowbite";
+import { initThemeToggling } from "./theme";
+
+// Theme toggling
+initThemeToggling();
 
 // html calculator (to be kept in sync with the 3D model)
 initTabs();
