@@ -92,6 +92,92 @@ loader.load(
   }
 );
 
+// Invisible buttons to detect clicks
+// We will use the userData property to store the label
+// This will help us to identify the button clicked
+// If DEBUG_BTN is true then the buttons will be visible to debug
+const DEBUG_BTN = false; // Change this to false to hide the boxes and labels
+const buttonGeometry = new THREE.BoxGeometry(1, 1, 0.5);
+const debugMaterial = new THREE.MeshBasicMaterial({
+  color: 0x00ff00,
+});
+const transparentMaterial = new THREE.MeshBasicMaterial({
+  transparent: true,
+  opacity: 0,
+});
+const buttonMaterial = DEBUG_BTN ? debugMaterial : transparentMaterial;
+const buttonMeshes: THREE.Mesh[] = [];
+const buttonLabels = [
+  "", // _
+  "", // _
+  "", // _
+  "%",
+  "/",
+  "", // _
+  "7",
+  "8",
+  "9",
+  "x",
+  "", // _
+  "4",
+  "5",
+  "6",
+  "-",
+  "CE",
+  "1",
+  "2",
+  "3",
+  "+", // _
+  "C",
+  "0",
+  ".",
+  "=",
+  "+",
+];
+for (let i = 0; i < buttonLabels.length; i++) {
+  if (buttonLabels[i] === "") {
+    continue;
+  }
+  // Make the + button larger than the rest
+  const buttonMesh = new THREE.Mesh(buttonLabels[i] === "+" ? 
+  new THREE.BoxGeometry(1, 1.2, 0.5)
+  : buttonGeometry, buttonMaterial);
+  // Adjust the x-position based on the column index using the modulus operator
+  buttonMesh.position.set(
+    -3.5 + (i % 5) * 1.5 + (i % 5 === 0 ? 0.3 : i % 5 === 4 ? 0.7 : 0.5), // 5 columns, each 1.5 units wide, with extra spacing on the first and last columns
+    5 - Math.floor(i / 5) * 1.2, // 5 rows, each 1.5 units high
+    0.4
+  );
+
+  buttonMesh.userData.label = buttonLabels[i];
+  scene.add(buttonMesh);
+  buttonMeshes.push(buttonMesh);
+
+  // Load the font and create the text mesh only when DEBUG_BTN is true
+  if (DEBUG_BTN) {
+    const fontLoader = new FontLoader();
+    fontLoader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
+      const textGeometry = new TextGeometry(buttonLabels[i], {
+        font: font,
+        size: 0.5,
+        depth: 0.1,
+      });
+      const textMaterial = new THREE.MeshBasicMaterial({
+        color: 0x000000,
+      });
+      // Adjust the x-position of the text mesh based on the column index using the modulus operator
+      const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+      textMesh.position.set(
+        -3.5 + (i % 5) * 1.5 + (i % 5 === 0 ? 0.3 : i % 5 === 4 ? 0.7 : 0.5), // 5 columns, each 1.5 units wide, with extra spacing on the first and last columns
+        (5 - 0.3 /*offset*/) - Math.floor(i / 5) * 1.2, // 5 rows, each 1.5 units high
+        0.6 // Slightly above the button
+      );
+      scene.add(textMesh);
+    });
+  }
+}
+
+
 // Screen
 // To display the text
 // We won't be using the screen from the model
