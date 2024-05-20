@@ -6,6 +6,9 @@ export class Calculator {
   }
 
   handleInput(input: string): void {
+    if (this._expression === 'Error') {
+      this._expression = '0';
+    }
     switch (input) {
       case 'C':
         this._expression = '0';
