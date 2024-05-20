@@ -272,6 +272,8 @@ window.addEventListener("keydown", (event) => {
     calculator.handleInput("=");
   } else if (event.key === "Backspace") {
     calculator.handleInput("CE");
+  } else if (event.key === "Escape") {
+    calculator.handleInput("C");
   }
   updateText(calculator.getExpression());
 });
