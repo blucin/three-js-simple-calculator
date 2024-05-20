@@ -118,11 +118,14 @@ const updateText = (text: string) => {
   fontLoader.load(
     "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
     (font) => {
-      const textGeometry = new TextGeometry(text.length > 10 ? "Overflow" : text, {
-        font: font,
-        size: 0.7,
-        depth: 0.15,
-      });
+      const textGeometry = new TextGeometry(
+        text.length > 10 ? "Overflow" : text,
+        {
+          font: font,
+          size: 0.7,
+          depth: 0.15,
+        }
+      );
 
       const textMaterial = new THREE.MeshStandardMaterial({
         color: 0x000000, // Bright color for visibility
