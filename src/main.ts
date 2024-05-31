@@ -75,6 +75,28 @@ controls.enableZoom = true;
 controls.enablePan = true;
 controls.enableRotate = true;
 
+// skybox setup
+const textureLoader = new THREE.TextureLoader();
+const skyboxTextures = [
+  textureLoader.load("DallasW/posx.jpg"),
+  textureLoader.load("DallasW/negx.jpg"),
+  textureLoader.load("DallasW/posy.jpg"),
+  textureLoader.load("DallasW/negy.jpg"),
+  textureLoader.load("DallasW/posz.jpg"),
+  textureLoader.load("DallasW/negz.jpg")
+];
+
+const materialArray = skyboxTextures.map(texture => {
+  return new THREE.MeshBasicMaterial({
+    map: texture,
+    side: THREE.BackSide
+  });
+});
+
+const skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
+const skybox = new THREE.Mesh(skyboxGeo, materialArray);
+scene.add(skybox);
+
 // Create calculator instance
 const calculator = new Calculator();
 
