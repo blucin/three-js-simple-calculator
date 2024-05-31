@@ -64,7 +64,7 @@ scene.add(camera);
 
 // renderer
 const canvas = document.getElementById("threejs-canvas") as HTMLCanvasElement;
-const renderer = new THREE.WebGLRenderer({ canvas });
+const renderer = new THREE.WebGLRenderer({ canvas,  antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // controls
