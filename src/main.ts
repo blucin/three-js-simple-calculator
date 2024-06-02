@@ -52,6 +52,11 @@ const light = new THREE.PointLight(0xffffff, 1000, 100);
 light.position.set(0, 0, 20);
 scene.add(light);
 
+// ambient light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+ambientLight.position.set(0, 0, 20);
+scene.add(ambientLight);
+
 // camera
 const camera = new THREE.PerspectiveCamera(
   70,
@@ -64,7 +69,7 @@ scene.add(camera);
 
 // renderer
 const canvas = document.getElementById("threejs-canvas") as HTMLCanvasElement;
-const renderer = new THREE.WebGLRenderer({ canvas });
+const renderer = new THREE.WebGLRenderer({ canvas,  antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // controls
@@ -74,6 +79,18 @@ controls.dampingFactor = 0.25;
 controls.enableZoom = true;
 controls.enablePan = true;
 controls.enableRotate = true;
+
+// skybox setup
+const textureLoader = new THREE.CubeTextureLoader();
+const skyboxTextures = textureLoader.load([
+  "/Vasa/posx.jpg",
+  "/Vasa/negx.jpg",
+  "/Vasa/posy.jpg",
+  "/Vasa/negy.jpg",
+  "/Vasa/posz.jpg",
+  "/Vasa/negz.jpg",
+]);
+scene.background = skyboxTextures;
 
 // Create calculator instance
 const calculator = new Calculator();
