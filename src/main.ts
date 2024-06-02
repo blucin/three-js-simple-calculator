@@ -69,7 +69,7 @@ scene.add(camera);
 
 // renderer
 const canvas = document.getElementById("threejs-canvas") as HTMLCanvasElement;
-const renderer = new THREE.WebGLRenderer({ canvas,  antialias: true });
+const renderer = new THREE.WebGLRenderer({ canvas,  antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // controls
@@ -81,26 +81,16 @@ controls.enablePan = true;
 controls.enableRotate = true;
 
 // skybox setup
-const textureLoader = new THREE.TextureLoader();
-const skyboxTextures = [
-  textureLoader.load("DallasW/posx.jpg"),
-  textureLoader.load("DallasW/negx.jpg"),
-  textureLoader.load("DallasW/posy.jpg"),
-  textureLoader.load("DallasW/negy.jpg"),
-  textureLoader.load("DallasW/posz.jpg"),
-  textureLoader.load("DallasW/negz.jpg")
-];
-
-const materialArray = skyboxTextures.map(texture => {
-  return new THREE.MeshBasicMaterial({
-    map: texture,
-    side: THREE.BackSide
-  });
-});
-
-const skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
-const skybox = new THREE.Mesh(skyboxGeo, materialArray);
-scene.add(skybox);
+const textureLoader = new THREE.CubeTextureLoader();
+const skyboxTextures = textureLoader.load([
+  "/Vasa/posx.jpg",
+  "/Vasa/negx.jpg",
+  "/Vasa/posy.jpg",
+  "/Vasa/negy.jpg",
+  "/Vasa/posz.jpg",
+  "/Vasa/negz.jpg",
+]);
+scene.background = skyboxTextures;
 
 // Create calculator instance
 const calculator = new Calculator();
