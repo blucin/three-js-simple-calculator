@@ -83,12 +83,12 @@ controls.enableRotate = true;
 // skybox setup
 const textureLoader = new THREE.CubeTextureLoader();
 const skyboxTextures = textureLoader.load([
-  "/Vasa/posx.jpg",
-  "/Vasa/negx.jpg",
-  "/Vasa/posy.jpg",
-  "/Vasa/negy.jpg",
-  "/Vasa/posz.jpg",
-  "/Vasa/negz.jpg",
+  "./Vasa/posx.jpg",
+  "./Vasa/negx.jpg",
+  "./Vasa/posy.jpg",
+  "./Vasa/negy.jpg",
+  "./Vasa/posz.jpg",
+  "./Vasa/negz.jpg",
 ]);
 scene.background = skyboxTextures;
 
@@ -98,7 +98,7 @@ const calculator = new Calculator();
 // Load the GLTF model of calculator
 const loader = new GLTFLoader();
 loader.load(
-  "/calculator.glb",
+  "./calculator.glb",
   (gltf) => {
     const calculatorModel = gltf.scene;
     scene.add(calculatorModel);
