@@ -35,13 +35,18 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.1.x
+      - name: Install dependencies
+        run: bun install
+      - name: Run build
+        run: bun run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          generator_config_file: dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
